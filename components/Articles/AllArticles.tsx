@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import type { Prisma } from "@/app/generated/prisma";
+import type { Prisma } from "@prisma/client";
 
 type AllArticleProps = {
   articles: Prisma.ArticleGetPayload<{
