@@ -35,14 +35,18 @@ const BlogDashboard = async () => {
     }),
     Prisma.comment.count({
       where: {
-        authorId: user?.id || "",
+        authorId:{
+          not:user?.id || ""
+        } 
       },
     }),
   ]);
 
   const likes = await Prisma.like.count({
     where: {
-      userId: user?.id || "",
+      userId:{
+        not: user?.id || "",
+      }
     },
   });
 
