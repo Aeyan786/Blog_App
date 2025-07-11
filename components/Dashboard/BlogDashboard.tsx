@@ -15,41 +15,40 @@ const BlogDashboard = async () => {
     },
   });
   const [articles, totalComments] = await Promise.all([
-    prisma.article.findMany({
-      where: {
-        authorId: user?.id || "",
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        comments: true,
-        author: {
-          select: {
-            name: true,
-            email: true,
-            imageUrl: true,
-          },
-        },
-      },
-    }),
-    prisma.comment.count({
-      where: {
-        NOT: {
-          authorId: user?.id,
-        },
-      },
-    }),
-  ]);
-
-  const likes = await prisma.like.count({
+  prisma.article.findMany({
     where: {
-      NOT: {
-        userId: user?.id,
+      authorId: user?.id || "",
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      comments: true,
+      author: {
+        select: {
+          name: true,
+          email: true,
+          imageUrl: true,
+        },
       },
     },
-  });
+  }),
+  prisma.comment.count({
+    where: {
+      article: {
+        authorId: user?.id,
+      },
+    },
+  }),
+]);
 
+const likes = await prisma.like.count({
+  where: {
+    article: {
+      authorId: user?.id,
+    },
+  },
+});
   return (
     <main className="flex-1 px-4 py-6 sm:px-6 md:px-8 lg:px-12">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
