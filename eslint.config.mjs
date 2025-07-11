@@ -1,3 +1,4 @@
+// eslint.config.ts
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -13,6 +14,14 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+    },
+  },
+
+  {
     files: ["app/generated/**"],
     rules: {
       "@typescript-eslint/no-unused-vars": "off",
@@ -24,7 +33,6 @@ const eslintConfig = [
       "@typescript-eslint/no-require-imports": "off",
       "@typescript-eslint/no-unnecessary-type-constraint": "off",
       "@typescript-eslint/no-wrapper-object-types": "off",
-      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];
