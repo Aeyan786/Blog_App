@@ -3,8 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
-import { error } from "console";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 cloudinary.config({
@@ -56,7 +55,7 @@ export const CreateArticle = async (
     };
   }
 
-  const existingUser = await Prisma.user.findUnique({
+  const existingUser = await prisma.user.findUnique({
     where: {
       clerkUserId: userId,
     },
@@ -108,7 +107,7 @@ export const CreateArticle = async (
   }
 
   try {
-    await Prisma.article.create({
+    await prisma.article.create({
       data: {
         title: result.data.title,
         category: result.data.category,

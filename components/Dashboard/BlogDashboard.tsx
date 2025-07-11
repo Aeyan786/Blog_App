@@ -4,18 +4,18 @@ import { Button } from "../ui/button";
 import { Clock, FileText, MessageCircle, Plus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import RecentArticles from "./RecentArticles";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
 const BlogDashboard = async () => {
   const { userId } = await auth();
-  const user = await Prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       clerkUserId: userId || "",
     },
   });
   const [articles, totalComments] = await Promise.all([
-    Prisma.article.findMany({
+    prisma.article.findMany({
       where: {
         authorId: user?.id || "",
       },
@@ -33,7 +33,7 @@ const BlogDashboard = async () => {
         },
       },
     }),
-    Prisma.comment.count({
+    prisma.comment.count({
       where: {
         authorId:{
           not:user?.id || ""
@@ -42,7 +42,7 @@ const BlogDashboard = async () => {
     }),
   ]);
 
-  const likes = await Prisma.like.count({
+  const likes = await prisma.like.count({
     where: {
       userId:{
         not: user?.id || "",

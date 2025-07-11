@@ -1,6 +1,6 @@
 "use server";
 
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
@@ -10,7 +10,7 @@ export const LikeDislike = async (articleId: string) => {
     throw new Error("you must have to login ");
   }
 
-  const user = await Prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       clerkUserId: userId,
     },
@@ -19,17 +19,17 @@ export const LikeDislike = async (articleId: string) => {
     throw new Error("user does not exists");
   }
 
-  const existingLike = await Prisma.like.findFirst({
+  const existingLike = await prisma.like.findFirst({
     where: { articleId, userId: user.id },
   });
   if (existingLike) {
-    await Prisma.like.delete({
+    await prisma.like.delete({
       where: {
         id: existingLike.id,
       },
     });
   } else {
-    await Prisma.like.create({
+    await prisma.like.create({
       data: {
         articleId,
         userId: user.id,

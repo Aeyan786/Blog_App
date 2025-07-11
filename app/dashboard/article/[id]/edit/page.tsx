@@ -1,5 +1,5 @@
 import EditArticle from "@/components/Articles/EditArticle";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import React from "react";
 
 type EditArticlePageParams = {
@@ -8,7 +8,7 @@ type EditArticlePageParams = {
 
 const Editpage: React.FC<EditArticlePageParams> = async ({ params }) => {
   const id = (await params).id;
-  const article = await Prisma.article.findUnique({
+  const article = await prisma.article.findUnique({
     where: { id },
   });
   if (!article) {

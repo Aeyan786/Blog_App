@@ -3,10 +3,10 @@ import { Card } from "../ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 const TopArticles = async () => {
-  const articles = await Prisma.article.findMany({
+  const articles = await prisma.article.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -24,7 +24,7 @@ const TopArticles = async () => {
 
   return (
     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {articles.slice(0, 3).map((e, i) => {
+      {articles.slice(0, 3).map((e:any, i:any) => {
         return (
           <Card
             key={i}

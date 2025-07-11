@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 cloudinary.config({
@@ -56,7 +56,7 @@ export const EditArticleAction = async (
     };
   }
 
-  const existingArticle = await Prisma.article.findUnique({
+  const existingArticle = await prisma.article.findUnique({
     where: { id: articleId },
   });
   if (!existingArticle) {
@@ -67,7 +67,7 @@ export const EditArticleAction = async (
     };
   }
 
-  const existingUser = await Prisma.user.findUnique({
+  const existingUser = await prisma.user.findUnique({
     where: {
       clerkUserId: userId,
     },
@@ -124,7 +124,7 @@ export const EditArticleAction = async (
   }
 
   try {
-    await Prisma.article.update({
+    await prisma.article.update({
       where: {
         id: articleId,
       },

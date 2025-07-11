@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import React from "react";
 import {
   Table,
@@ -18,12 +18,12 @@ import { auth } from "@clerk/nextjs/server";
 
 const page = async () => {
   const { userId } = await auth();
-  const user = await Prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       clerkUserId: userId || "",
     },
   });
-  const articles = await Prisma.article.findMany({
+  const articles = await prisma.article.findMany({
     where: {
       authorId: user?.id || "",
     },
@@ -71,7 +71,7 @@ const page = async () => {
             </TableHeader>
 
             <TableBody>
-              {articles.map((e, i) => {
+              {articles.map((e:any, i:any) => {
                 return (
                   <TableRow key={i} className="hover:bg-muted/40 transition">
                     <TableCell className="font-medium">{e.title}</TableCell>

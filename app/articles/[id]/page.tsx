@@ -1,5 +1,5 @@
 import ArticleDetails from '@/components/Articles/ArticleDetails'
-import { Prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import React from 'react'
 
 
@@ -11,7 +11,7 @@ const ArticleDetailsPage :React.FC<articleDetailPageProps> = async ({params}) =>
   
   const id = (await params).id
 
-  const article = await Prisma.article.findUnique({
+  const article = await prisma.article.findUnique({
     where:{
         id
     },

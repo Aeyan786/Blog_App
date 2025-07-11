@@ -1,5 +1,5 @@
 "use server";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -39,7 +39,7 @@ export const CreateComment = async (
       },
     };
   }
-  const existingUser = await Prisma.user.findUnique({
+  const existingUser = await prisma.user.findUnique({
     where: {
       clerkUserId: userId,
     },
@@ -52,7 +52,7 @@ export const CreateComment = async (
     };
   }
   try {
-    await Prisma.comment.create({
+    await prisma.comment.create({
       data: {
         body: result.data.comment,
         authorId: existingUser.id,

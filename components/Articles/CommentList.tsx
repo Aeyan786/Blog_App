@@ -1,13 +1,13 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 type commentListprops = {
   articleId: string;
 };
 
 const CommentList: React.FC<commentListprops> = async ({ articleId }) => {
-  const comments = await Prisma.comment.findMany({
+  const comments = await prisma.comment.findMany({
     where: {
       articleId: articleId,
     },
@@ -23,7 +23,7 @@ const CommentList: React.FC<commentListprops> = async ({ articleId }) => {
   });
   return (
     <div className="space-y-8">
-      {comments.map((e, i) => {
+      {comments.map((e:any, i:any) => {
         return (
           <div key={i} className="flex gap-4">
             <Avatar className="h-10 w-10">
