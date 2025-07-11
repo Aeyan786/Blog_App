@@ -1,18 +1,18 @@
 "use server";
 import { currentUser } from "@clerk/nextjs/server";
-import { Prisma } from "@/lib/prisma"
+import { prisma } from "@/lib/prisma"
 
 export async function ensureUserExists() {
   const user = await currentUser();
   
   if (!user) return null;
 
-  const existing = await Prisma.user.findUnique({
+  const existing = await prisma.user.findUnique({
     where: { clerkUserId: user.id },
   });
 
   if (!existing) {
-    await Prisma.user.create({
+    await prisma.user.create({
       data: {
         name: user.fullName ?? "No Name",
         clerkUserId: user.id,

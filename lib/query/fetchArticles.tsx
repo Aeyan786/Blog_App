@@ -1,12 +1,12 @@
-import { Prisma } from "../prisma";
+import { prisma } from "../prisma";
 
 export const fetchArticles = async (
   searchText: string,
   skip: number,
   take: number
 ) => {
-  const [articles, total] = await Prisma.$transaction([
-    Prisma.article.findMany({
+  const [articles, total] = await prisma.$transaction([
+    prisma.article.findMany({
       where: {
         OR: [
           { title: { contains: searchText, mode: "insensitive" } },
@@ -25,7 +25,7 @@ export const fetchArticles = async (
       skip: skip,
       take: take,
     }),
-    Prisma.article.count({
+    prisma.article.count({
       where: {
         OR: [
           { title: { contains: searchText, mode: "insensitive" } },
