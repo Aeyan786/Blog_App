@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import "react-quill-new/dist/quill.snow.css";
 import { EditArticleAction } from "@/actions/edit-article";
-import { Article } from "@/app/generated/prisma";
+import { Article } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
 
