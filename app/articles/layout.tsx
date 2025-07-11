@@ -1,4 +1,3 @@
-import LeftSideBar from "@/components/Dashboard/LeftSideBar";
 import Footer from "@/components/Home/Footer";
 import Navbar from "@/components/Home/Header/Navbar";
 import React from "react";

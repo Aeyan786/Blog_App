@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Button } from "../../ui/button";
 import SearchInupt from "./SearchInupt";
 import ToggleMode from "../ToggleMode";
@@ -65,7 +65,10 @@ const Navbar = () => {
             <ToggleMode />
 
             <div className="hidden md:flex items-center gap-4">
+              <Suspense>
+
               <SearchInupt />
+              </Suspense>
 
               <SignedIn>
                 <UserButton />

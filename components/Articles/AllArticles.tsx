@@ -2,7 +2,6 @@ import React from "react";
 import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { fetchArticles } from "@/lib/query/fetchArticles";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import type { Prisma } from "@/app/generated/prisma";
@@ -89,7 +88,7 @@ const NoSearchResults = () => {
       </div>
       <h3 className="font-bold text-xl">No results found!</h3>
       <p className="mt-2">
-        Oops! The article you're looking for doesn't exist.
+        Oops! The article you&apos;re looking for doesn&apos;t exist.
       </p>
     </div>
   );

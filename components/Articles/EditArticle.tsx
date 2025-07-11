@@ -9,6 +9,7 @@ import "react-quill-new/dist/quill.snow.css";
 import { EditArticleAction } from "@/actions/edit-article";
 import { Article } from "@/app/generated/prisma";
 import Link from "next/link";
+import Image from "next/image";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
@@ -81,7 +82,7 @@ const EditArticle: React.FC<EditArticleProps> = ({ article }) => {
               />
               <div className="mb-4 flex justify-center">
                 {article.featuredImage && (
-                  <img
+                  <Image
                     src={article.featuredImage}
                     alt="image"
                     className=" h-32 object-contain rounded-md"
@@ -102,9 +103,10 @@ const EditArticle: React.FC<EditArticleProps> = ({ article }) => {
             </div>
 
             <div className="flex justify-end gap-3 pt-4">
-               <Link href={'/dashboard'}><Button type="button" variant="outline">
-                Cancel
-              </Button>
+              <Link href={"/dashboard"}>
+                <Button type="button" variant="outline">
+                  Cancel
+                </Button>
               </Link>
               <Button
                 className="cursor-pointer"

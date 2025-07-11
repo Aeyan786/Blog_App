@@ -13,7 +13,7 @@ const About = () => {
         </p>
 </Link>
         <p className="text-base sm:text-lg">
-          At BlogNest, we believe everyone has a story worth sharing. Whether you’re a writer, reader, or creative mind,
+          At BlogNest, we believe everyone has a story worth sharing. Whether you&apos;re a writer, reader, or creative mind,
           our platform offers a clean, minimal space to express, explore, and engage.
         </p>
 
@@ -37,7 +37,7 @@ const About = () => {
         </div>
 
         <p className="mt-10 text-base text-muted-foreground">
-          Whether it's your first post or your hundredth, BlogNest is your space to write, share, and grow.
+          Whether it&apos;s your first post or your hundredth, BlogNest is your space to write, share, and grow.
         </p>
       </div>
     </div>

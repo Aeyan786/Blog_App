@@ -9,11 +9,9 @@ import {
 } from "../ui/sheet";
 import { Button } from "../ui/button";
 import {
-  BarChart,
   FileText,
   LayoutDashboard,
-  MessageCircle,
-  Settings,
+
 } from "lucide-react";
 import Link from "next/link";
 import ToggleMode from "../Home/ToggleMode";

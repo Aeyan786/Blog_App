@@ -1,3 +1,4 @@
+import { ArticlePageSkeleton } from "@/components/ArticlePageSkeleton";
 import Footer from "@/components/Home/Footer";
 import Navbar from "@/components/Home/Header/Navbar";
 import HeroSection from "@/components/Home/HeroSection";
@@ -6,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { ensureUserExists } from "@/lib/userExists";
 import Link from "next/link";
 import { Suspense } from "react";
-import { ArticlePageSkeleton } from "../articles/page";
 
 export default async function Home() {
   await ensureUserExists()
