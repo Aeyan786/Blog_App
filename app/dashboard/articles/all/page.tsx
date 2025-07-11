@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Prisma } from '@/lib/prisma'
-import React from 'react'
+import { Prisma } from "@/lib/prisma";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -14,26 +14,35 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { DeleteButton } from "@/components/Dashboard/RecentArticles";
+import { auth } from "@clerk/nextjs/server";
 
-const page =async () => {
-  
-    const articles = await Prisma.article.findMany({
-          orderBy: {
-            createdAt: "desc",
-          },
-          include: {
-            comments: true,
-            author: {
-              select: {
-                name: true,
-                email: true,
-                imageUrl: true,
-              },
-            },
-          },
-        })
-  
-    return (
+const page = async () => {
+  const { userId } = await auth();
+  const user = await Prisma.user.findUnique({
+    where: {
+      clerkUserId: userId || "",
+    },
+  });
+  const articles = await Prisma.article.findMany({
+    where: {
+      authorId: user?.id || "",
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      comments: true,
+      author: {
+        select: {
+          name: true,
+          email: true,
+          imageUrl: true,
+        },
+      },
+    },
+  });
+
+  return (
     <Card className="mt-8 mx-5">
       <CardHeader className="flex flex-row items-center justify-between space-y-0">
         <CardTitle className="text-lg font-semibold tracking-tight">
@@ -76,7 +85,11 @@ const page =async () => {
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-2 ">
                         <Link href={`/dashboard/article/${e.id}/edit`}>
-                          <Button variant="ghost" className="cursor-pointer" size="sm">
+                          <Button
+                            variant="ghost"
+                            className="cursor-pointer"
+                            size="sm"
+                          >
                             Edit
                           </Button>
                         </Link>
@@ -91,7 +104,7 @@ const page =async () => {
         </CardContent>
       )}
     </Card>
-  )
-}
+  );
+};
 
-export default page
+export default page;

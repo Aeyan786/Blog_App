@@ -30,7 +30,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     <div className="flex gap-4 mb-12 border-t pt-8">
       <form action={handleLikeDislike}>
         <Button disabled={isPending} type="submit" className="gap-2" variant={"ghost"}>
-          <ThumbsUp className={`h-5 w-5 ${!likes.length? "" :"fill-blue-500 text-blue-500"}`} />
+          <ThumbsUp className={`h-5 w-5 ${!isLiked? "" :"fill-blue-500 text-blue-500"}`} />
           {optimisticLike}
         </Button>
       </form>
