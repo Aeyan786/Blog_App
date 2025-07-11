@@ -20,7 +20,7 @@ const CommentInput: React.FC<commentInputProps> = ({ articleId }) => {
       <div className="flex gap-4">
         <Avatar>
           <AvatarImage />
-          <AvatarFallback>AR</AvatarFallback>
+          <AvatarFallback>C</AvatarFallback>
         </Avatar>
         <div className="flex-1">
           <Input type="text" name="comment" placeholder="Add a comment..." />
